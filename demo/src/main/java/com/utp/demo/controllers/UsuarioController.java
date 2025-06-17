@@ -46,16 +46,9 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuario3")
-    public Usuario eliminaruUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Anghelo");
-        usuario.setApellido("Gato");
-        usuario.setEmail("@gato.com");
-        usuario.setTelefono("972390606");
-        usuario.setPassword("gato1");
-
-        return usuario;
+     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
+    public void eliminaruUsuario(@PathVariable Long id) {
+        usuarioDao.eliminaruUsuario(id);
     }
 
     @RequestMapping(value = "usuario4")

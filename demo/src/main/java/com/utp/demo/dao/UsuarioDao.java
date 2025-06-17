@@ -7,4 +7,6 @@ public interface UsuarioDao {
 
     List<Usuario> getUsuarios();
 
+    void eliminaruUsuario(Long id);
+
 }
