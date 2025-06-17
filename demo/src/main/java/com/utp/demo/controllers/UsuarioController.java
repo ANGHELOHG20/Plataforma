@@ -48,7 +48,7 @@ public class UsuarioController {
 
      @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
     public void eliminaruUsuario(@PathVariable Long id) {
-        usuarioDao.eliminaruUsuario(id);
+        usuarioDao.eliminarUsuario(id);
     }
 
     @RequestMapping(value = "usuario4")
