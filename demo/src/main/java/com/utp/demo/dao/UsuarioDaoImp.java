@@ -26,6 +26,14 @@ public class UsuarioDaoImp implements UsuarioDao{
     }
 
     @Override
+    public List<Usuario> buscarPorNombre(String nombre) {
+        String query = "FROM Usuario WHERE LOWER(nombre) LIKE :nombre OR LOWER(apellido) LIKE :nombre";
+        return entityManager.createQuery(query)
+            .setParameter("nombre", "%" + nombre.toLowerCase() + "%")
+            .getResultList();
+    }
+
+    @Override
     public void eliminarUsuario(Long id) {
         Usuario usuario = entityManager.find(Usuario.class, id);
         entityManager.remove(usuario);

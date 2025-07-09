@@ -9,4 +9,5 @@ public interface UsuarioDao {
 
     void eliminarUsuario(Long id);
 
+    List<Usuario> buscarPorNombre(String nombre);
 }

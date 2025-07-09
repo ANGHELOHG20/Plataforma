@@ -28,11 +28,14 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "api/usuarios")
-
-        public List<Usuario> getUsuarios() {
-        return usuarioDao.getUsuarios();
+    @GetMapping("api/usuarios")
+    public List<Usuario> getUsuarios(@RequestParam(required = false) String search) {
+        if (search != null && !search.isEmpty()) {
+            return usuarioDao.buscarPorNombre(search);
+        }
+            return usuarioDao.getUsuarios();
     }
+
 
     @RequestMapping(value = "usuario2")
     public Usuario editarUsuario() {
