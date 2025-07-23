@@ -10,4 +10,6 @@ public interface UsuarioDao {
     void eliminarUsuario(Long id);
 
     List<Usuario> buscarPorNombre(String nombre);
+
+    void registrar(Usuario usuario);
 }

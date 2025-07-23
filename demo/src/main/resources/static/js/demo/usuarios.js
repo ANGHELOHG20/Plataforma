@@ -13,8 +13,22 @@ async function cargarUsuarios() {
     },
   });
   const usuarios = await request.json();
+
+   // Obtener criterio de ordenamiento
+  const criterio = document.getElementById('ordenarPor').value;
+
+  // Ordenar según el criterio seleccionado
+  usuarios.sort((a, b) => {
+    if (criterio === "id-asc") return a.id - b.id;
+    if (criterio === "id-desc") return b.id - a.id;
+    if (criterio === "nombre-asc") return a.nombre.localeCompare(b.nombre);
+    if (criterio === "nombre-desc") return b.nombre.localeCompare(a.nombre);
+    return 0;
+  });
+
   renderizarUsuarios(usuarios);
 }
+
 
 async function eliminarUsuario(id) {
   if (!confirm('¿Desea eliminar al usuario?')) {
@@ -55,7 +69,7 @@ function renderizarUsuarios(usuarios) {
   document.querySelector('#usuarios tbody').innerHTML = listadoHtml;
 }
 
-// Escucha el input del buscador en tiempo real
+// Tiempo real
 document.getElementById("buscarInput").addEventListener("keyup", function () {
   const texto = this.value.trim();
   if (texto === '') {

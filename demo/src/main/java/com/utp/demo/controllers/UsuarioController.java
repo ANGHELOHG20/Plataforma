@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.utp.demo.dao.UsuarioDao;
 import com.utp.demo.models.Usuario;
 
-
+import java.lang.reflect.Method;
 import java.util.List;
 
 
@@ -16,18 +16,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioDao usuarioDao;
 
-    @RequestMapping(value = "api/usuario/{id}")
-    public Usuario getUsuario(@PathVariable Long id) {
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setNombre("Anghelo");
-        usuario.setApellido("Gato");
-        usuario.setEmail("@gato.com");
-        usuario.setTelefono("972390606");
-        usuario.setPassword("gato1");
-        return usuario;
-    }
-
     @GetMapping("api/usuarios")
     public List<Usuario> getUsuarios(@RequestParam(required = false) String search) {
         if (search != null && !search.isEmpty()) {
@@ -35,34 +23,14 @@ public class UsuarioController {
         }
             return usuarioDao.getUsuarios();
     }
-
-
-    @RequestMapping(value = "usuario2")
-    public Usuario editarUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Anghelo");
-        usuario.setApellido("Gato");
-        usuario.setEmail("@gato.com");
-        usuario.setTelefono("972390606");
-        usuario.setPassword("gato1");
-
-        return usuario;
+    
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
+    public void registrarUsuario(@RequestBody Usuario usuario) {
+            usuarioDao.registrar(usuario);
     }
 
-     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
     public void eliminaruUsuario(@PathVariable Long id) {
         usuarioDao.eliminarUsuario(id);
-    }
-
-    @RequestMapping(value = "usuario4")
-    public Usuario buscarUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Anghelo");
-        usuario.setApellido("Gato");
-        usuario.setEmail("@gato.com");
-        usuario.setTelefono("972390606");
-        usuario.setPassword("gato1");
-
-        return usuario;
     }
 }
